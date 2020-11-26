@@ -38,7 +38,7 @@ app.post('/reset', function (req, res, next) {
     database.resetTables()
         .then((result) => {
             res.status(200);
-            res.send();
+            res.send("ok");
         })
         .catch(next)
 })
