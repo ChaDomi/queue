@@ -40,7 +40,9 @@ app.post('/reset', function (req, res, next) {
             res.status(200);
             res.send("ok");
         })
-        .catch(next)
+        .catch((error) => {
+            next();
+        })
 })
 /**
  * ========================== COMPANY =========================
