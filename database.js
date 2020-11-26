@@ -1,6 +1,6 @@
 const { Client } = require('pg');
 
-var connectionString = 'postgres://hptqtslk:wnFFS5f5GdF2WivzRbBDI4JI5nFIgjUP@john.db.elephantsql.com:5432/hptqtslk';
+var connectionString = 'postgres://gkerbwhl:FgLLyy2Yda-bqWsebhnd_bkYss7Wxhon@john.db.elephantsql.com:5432/gkerbwhl';
 
 /** 
  * Reset Tables
@@ -8,7 +8,7 @@ var connectionString = 'postgres://hptqtslk:wnFFS5f5GdF2WivzRbBDI4JI5nFIgjUP@joh
 function resetTables() {
     const client = new Client({ connectionString });
     client.connect();
-    const sql = `TRUNCATE TABLE customer; TRUNCATE TABLE queue;`;
+    const sql = `TRUNCATE TABLE customer, queue;`;
     return client
         .query(sql)
         .then((result) => {
