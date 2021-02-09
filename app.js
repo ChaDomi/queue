@@ -354,7 +354,7 @@ app.get('/company/queue/', function (req, res, next) {
         database.getQueue(company_id)
             .then((resultArr) => {
                 res.status(200);
-                res.json(resultArr.rows);
+                res.json(resultArr);
             })
             .catch((error) => {
                 if (err.message == 'Cannot read property \'queue_id\' of undefined') {
