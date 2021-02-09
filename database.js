@@ -201,7 +201,7 @@ function getQueue(company_id) {
         .query(sql, sqlParams)
         .then((result) => {
             console.log(result);
-            return result.rows.queue_id;
+            return result;
         })
         .catch((error) => {
             client.end();
