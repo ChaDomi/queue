@@ -195,7 +195,7 @@ function serverAvailable(queue_id) {
 function getQueue(company_id) {
     const client = new Client({ connectionString });
     client.connect();
-    const sql = `SELECT *   FROM queue_tab WHERE company_id = $1;`;//check if queue active
+    const sql = `SELECT queue_id, status FROM queue_tab WHERE company_id = $1;`;//check if queue active
     const sqlParams = [company_id];
     return client
         .query(sql, sqlParams)
