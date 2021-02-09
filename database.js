@@ -1,7 +1,7 @@
 const { Client } = require('pg');
 
 // postgres sql link
-var connectionString = 'postgres://gkerbwhl:FgLLyy2Yda-bqWsebhnd_bkYss7Wxhon@john.db.elephantsql.com:5432/gkerbwhl';
+var connectionString = 'postgres://pyssizgz:K-Ow5NF5SYjgqdjr7Zx_aKGi5937b_4f@john.db.elephantsql.com:5432/pyssizgz';
 
 /** 
  * Reset Tables
