@@ -355,7 +355,7 @@ app.get('/company/queue/', function (req, res, next) {
     };
     const validResult = validate(instance, checkQueueSchema); //validate jsonschema
     if (validResult.valid == true) {
-        database.checkQueue(queue_id)
+        database.getQueue(queue_id)
             .then(() => {
                 res.status(200);
                 res.json({

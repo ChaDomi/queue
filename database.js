@@ -191,6 +191,22 @@ function serverAvailable(queue_id) {
             }
         })
 }
+
+function getQueue(queue_id) {
+    const client = new Client({ connectionString });
+    client.connect();
+    const sql = `SELECT * FROM queue_tab Where queue_id = $1`; // selecting the first customer in queue
+    const sqlParams = [queue_id];
+    return client
+        .query(sql, sqlParams)
+        .then((result) => {
+            if (result.rowCount == 0) {//check if there is any customer in queue
+                client.end();
+                result = 0;
+                return result;
+            }
+        })
+}
 /** 
  * Arrival Rate
  */
