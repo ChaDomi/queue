@@ -178,8 +178,8 @@ function serverAvailable(queue_id) {
                 const sql = `DELETE FROM customer where customer_id = $1 and queue_id= $2;`; // after customer is selected , will be removed from queue
                 const sqlParams = [result.rows[0].customer_id, queue_id]
                 customer_id = result.rows[0].customer_id;
-                
-                return client.query(sql, sqlParams) 
+
+                return client.query(sql, sqlParams)
                     .then(() => {
                         client.end();
                         return customer_id;
@@ -195,18 +195,20 @@ function serverAvailable(queue_id) {
 function getQueue(queue_id) {
     const client = new Client({ connectionString });
     client.connect();
-    const sql = `SELECT * FROM queue_tab Where queue_id = $1`; // selecting the first customer in queue
+    const sql = `SELECT FROM queue_tab WHERE queue_id = $1;`;//check if queue active
     const sqlParams = [queue_id];
     return client
         .query(sql, sqlParams)
         .then((result) => {
-            if (result.rowCount == 0) {//check if there is any customer in queue
-                client.end();
-                result = 0;
-                return result;
-            }
+            console.log(result);
+            return result;
+        })
+        .catch((error) => {
+            client.end();
+            throw error;
         })
 }
+
 /** 
  * Arrival Rate
  */
@@ -257,6 +259,7 @@ function closeDatabaseConnections() {  // disconnecting the current client that 
 module.exports = {
     resetTables,
     createQueue,
+    getQueue,
     updateQueue,
     joinQueue,
     checkQueue,

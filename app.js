@@ -350,16 +350,12 @@ app.get('/customer/queue/', function (req, res, next) {
 })
 app.get('/company/queue/', function (req, res, next) {
     const queue_id = req.query.queue_id;
-    const instance = {
-        queue_id: queue_id,
-    };
-    const validResult = validate(instance, checkQueueSchema); //validate jsonschema
-    if (validResult.valid == true) {
         database.getQueue(queue_id)
             .then(() => {
                 res.status(200);
                 res.json({
                     queue_no: queue_id,
+                    is_active: is_active,
                  });
             })
             .catch((error) => {
@@ -368,7 +364,7 @@ app.get('/company/queue/', function (req, res, next) {
                 }
                 next(error);
             })
-    } 
+
 })
 /**
  * ========================== UTILS =========================
