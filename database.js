@@ -195,13 +195,24 @@ function serverAvailable(queue_id) {
 function getQueue(company_id) {
     const client = new Client({ connectionString });
     client.connect();
-    const sql = `SELECT queue_id, status FROM queue_tab WHERE company_id = $1;`;//check if queue active
+    const sql = `SELECT queue_id, status FROM queue WHERE company_id = $1;`;//check if queue active
     const sqlParams = [company_id];
     return client
         .query(sql, sqlParams)
-        .then((result) => {
-            console.log(result);
-            return result;
+        .then((res) => {
+            let finalRes =[]
+
+            for (i= 0 ; i < res.rowCount; i++){
+                let activated;
+                if (res.rows[i].status == "active"){
+                    activated = 1;
+                }
+                else{
+                    activated = 0;
+                }
+                finalRes[i] = {"queue_id": res.rows[i].queue_id, "is_active": activated}
+            }
+            return finalRes;
         })
         .catch((error) => {
             client.end();
