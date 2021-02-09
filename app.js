@@ -350,8 +350,8 @@ app.get('/customer/queue/', function (req, res, next) {
 })
 
 app.get('/company/queue/', function (req, res, next) {
-    const queue_id = req.query.queue_id;
-        database.getQueue(queue_id)
+    const company_id = req.query.company_id;
+        database.getQueue(company_id)
             .then((resultArr) => {
                 res.status(200);
                 res.json(resultArr);
